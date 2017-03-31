@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LT's Portfolio</title>
+	<link rel="stylesheet" type="text/css" href="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://use.fontawesome.com/1b2b1b531d.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<style type="text/css">
+
+	/* ===== Navigation ===== */
+
+		.navbar-default{
+			border:none;
+			background-color:rgba(253,253,253,0);
+			border-radius: 0px;
+		}
+		.navbar-nav{
+			float:right;
+			margin-right:20px;
+		}
+		.nav>li>a{
+			border-radius: 30px;
+			padding:8px 32px;
+			margin:10px 0;	
+			color:#fff !important;	
+			border:1px solid #fff;
+			margin-right:10px;
+		}
+
+		.navbar-brand{
+			color: #fff !important;
+		}
+
+		.navbar-default .navbar-nav>.active>a{
+			background: #fff;
+			color:#333 !important;
+		}
+
+		.navbar-header button{
+			margin-right:30px;
+		}
+	
+	/* ===== Hero ===== */
+
+		#hero-image{
+			position: absolute;
+			z-index: -1;
+			width:100%;
+			max-height: 600px;
+			overflow: hidden;
+		}
+
+		#hero-image video {
+		  position: absolute;
+		  top:0;
+		  left:0;		
+		  width: 100% !important;
+		}
+
+		@media screen and (min-width: 320px) and (max-width: 399px){
+			#hero-image video {	
+
+			}
+		}
+
+		#hero-image h1,h2{
+			position: relative;
+			z-index: 100;
+			text-align: center;
+			left:0;
+			width:100%;
+			color:#fff;
+		}
+
+		#hero-image h1{
+			padding-top: 8%;
+		}
+
+	/* ===== Content ===== */
+
+		#mainContent{
+			position: absolute;
+			margin-left:15px;
+			width:100%;
+		}
+
+		.feat{
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">LT</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">About<span class="sr-only">(current)</span></a></li>
+		  	<li><a href="#">Videos</a></li>
+		  	<li><a href="#">Images</a></li>
+		  </ul>
+		</div>
+	</nav> <!-- end of nav -->
+
+	<div id="hero-image">	
+		<!-- <div class="jumbotron"> -->
+		  	<div class="container">
+			  	<h1>Tagline</h1>
+				<h2>Sub Tagline</h2>
+				<video autoplay muted loop>
+				    <source src="the-making-of.mp4" type="video/mp4"> Your browser does not support the video tag.
+				</video>
+			</div>
+		<!-- </div> -->
+	</div>
+
+	<div id="mainContent" class="container">
+		<div class="row">
+			<div id="images" class="feat col-md-4">one</div>
+			<div id="videos" class="feat col-md-4">two</div>
+			<div id="projects" class="feat col-md-4">three</div>	
+		</div>	
+	</div>
+
+<script type="text/javascript">
+	var heroHeight = 0;
+
+	document.addEventListener("DOMContentLoaded", function(event) {
+		rwdHero(.05);
+		var navCollapse = false;
+		
+		$(".navbar-toggle").on('click',function() {
+			navCollapse = !navCollapse;
+			if(navCollapse){
+				rwdNavBtn();
+				console.log(navCollapse);
+			}
+		});
+		
+
+		console.log(navCollapse);
+	});
+
+	function rwdNavBtn(){
+		
+	}
+
+	function rwdHero(marginDiff){
+		heroHeight = document.querySelector("video").clientHeight;
+		document.querySelector("#mainContent").style.top = (heroHeight+(heroHeight*marginDiff))+"px";
+		document.querySelector("#hero-image").style.height = heroHeight+"px";
+		console.log(heroHeight);
+	}
+
+	window.onresize = function(event) {
+		if(heroHeight >= 600){
+			heroHeight = document.querySelector("video").clientHeight;
+			document.querySelector("#mainContent").style.top = "630px";	
+		}else{
+    		rwdHero(.05);
+		}
+	};
+	
+</script>
+	
+</body>
+</html>
+
+
+

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LT's Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/1b2b1b531d.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- GSAP -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+
+    
+    <style type="text/css">
+    /* ===== Nav ===== */
+    nav ul{
+    	float:right;
+    	list-style: none;
+    	margin-top:20px;
+    }
+
+    nav ul li{
+    	float:left;
+    	border:1px solid #333;
+    	margin-right:10px;
+    	padding:5px;
+    	border-radius: 30px;
+    	width:90px;
+    	text-align: center;
+    	cursor: pointer;
+    	color:#333;
+        z-index: 999;
+        transition: color .4s,background .4s, text-shadow .6s;
+        background: #fff;
+    }
+
+    @media screen and (max-width: 400px){
+       nav ul li{
+        width:70px !important;
+        font-size: 11px !important;
+       } 
+    }
+
+    nav ul li:hover{
+    	background:#eee;
+        text-shadow: 1px 2px 4px #000;
+    	color:#fff !important;
+    }
+
+    nav a{
+    	text-decoration: none;
+    }
+
+    #pages-nav{
+        display: none;
+    }
+    /* ===== Hero ===== */
+    
+    #hero-image {
+        position: fixed;
+        z-index: -1;
+        width: 100%;
+        height: 100vh;
+
+    }
+    
+    #hero-image video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+
+    }
+    
+    /* ===== Content ===== */
+    .overlay {
+        position: absolute;
+        z-index: 100;
+        text-align: center;
+        left: 0;
+        width: 100%;
+        color: #fff;
+    }
+
+    #logo{
+    	position: absolute;
+    	left:20px;
+    	top:20px;
+    	font-size: 28px;
+    	font-weight: bold;
+    	color:#fff;
+    }
+
+
+    #content ul{
+    	list-style: none;
+    	padding:0px;
+    	margin:0px;
+    }
+
+    #content ul li button{
+    	border-radius: 30px;
+    	border:2px solid #eee;
+    	width:170px;
+    	margin-bottom: 15px;
+    	background-color:transparent;
+    	text-shadow: 1px 1px 3px #333;
+    	color:#eee;
+    	font-weight: bold;
+        transition: color .4s,background .4s, text-shadow .6s;
+    }
+
+    #content ul li button:hover{
+    	background:#eee;
+    	color:#333 !important;
+    	text-shadow: none;
+    }
+    
+    #taglines{
+    	margin-bottom: 20px;
+    }
+
+    /* ===== Footer ===== */
+    footer{
+    	position: fixed;
+    	bottom:0;
+    	right:0;
+    	margin-right:30px;
+    }
+
+    footer ul{
+    	list-style: none;
+    }
+
+    footer .fa{
+    	color:#eee;
+    	text-shadow: 1px 2px 3px #000;
+        transition: color .6s, text-shadow .6s;
+    }
+
+    footer .fa:hover{
+        text-shadow: none;
+        color:#333;
+    }
+
+    /* =====  Pages ===== */
+
+    .pages{
+        display: none;
+    }
+    .pages ul{
+        list-style: none;
+    }
+    .pages .header{
+        margin-bottom: 20px;
+    }
+
+    /* ===== About page ===== */
+
+    #about-page p{
+        opacity: 0;
+        color:#000;
+    }
+
+    #avatar img{
+        border-radius: 50%;
+        width:100px;
+        height: 100px;
+        display: block;
+        margin:0 auto;
+        text-align: center;
+    }
+
+    /* ===== Video + Image page ===== */
+
+    .tile{
+        border:1px solid #eee;
+        border-radius:5px;
+        margin-right:10px;
+        margin-bottom: 10px;
+    }
+    .img-tile{
+        height:250px;
+    }
+    .vid-tile{
+        height:320px;
+    }
+    .tile-img{
+        width:100%;
+        height:150px;
+        overflow: hidden;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tile-vid{
+        width:100%;
+        height:280px;
+        overflow: hidden;
+        border-bottom: 1px solid #eee;
+    }    
+
+    @media screen and (max-width: 767px){
+        .img-tile{
+            height:350px !important;
+        }
+        .tile-img{
+            height:300px;
+        }  
+        .tile-vid{
+            height:500px;
+        }                
+    }
+
+    .tile-img img{
+        width: 100%;
+        position: relative;
+        z-index: -1;
+    }
+
+    .tile-desc{
+        padding:10px;
+    }
+
+    </style>
+</head>
+
+<body>
+	<nav>
+        <div id="logo">LT</div>
+        <ul id='pages-nav'>
+            <a><li id='home' class='nav-btn'>Home</li></a>
+            <a><li id='about' class='nav-btn'>About Me</li></a>
+            <a><li id='images' class='nav-btn'>Images</li></a>
+            <a><li id='videos' class='nav-btn'>Videos</li></a>
+        </ul>
+    </nav>
+    <div id="home-page" id="container-fluid">
+        <div id="hero-image">
+            <video autoplay muted loop playsinline>
+                <source src="the-making-of.mp4" type="video/mp4"> Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="overlay">
+        	<div id="content">
+	        	<div id="taglines" class="row">    		
+		            <h1 class="col-xs-12">Tagline</h1>
+		            <h2 class="col-xs-12">Sub Tagline</h2>        	
+	        	</div>
+	        	<ul class="row">
+	        		<li class="col-xs-12 col-md-2 col-md-offset-3"><button id="about" class="btn btn-default btn-lg nav-btn">ABOUT ME</button></li>
+	        		<li class="col-xs-12 col-md-2"><button id="images" class="btn btn-default btn-lg nav-btn">IMAGES</button></li>
+	        		<li class="col-xs-12 col-md-2"><button id="videos" class="btn btn-default btn-lg nav-btn">VIDEOS</button></li>
+	        	</ul>
+        	</div>
+        </div>
+    </div>
+
+    <div id="about-page" class="pages">
+    	<div class="container">
+    		<div id="row">
+    			<div class="header col-xs-12"><h1>ABOUT ME</h1></div>
+    			<div id="avatar" class="col-xs-12"><img src="https://mir-s3-cdn-cf.behance.net/user/138/e5380525127487.57e5ec5b24755.jpg"></div>
+               
+               <div id='logo'>LT</div><ul id='pages-nav'><a><li id='home' class='nav-btn'>Home</li></a><a><li id='images' class='nav-btn'>Images</li></a><a><li id='videos' class='nav-btn'>Videos</li></a></ul>
+
+    			<p class="col-xs-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+    			<p class="col-xs-12">orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    		</div>
+    	</div>	
+    </div>
+
+    <div id="images-page" class="pages">
+        <div class="container">
+            <div class="row"><div class="header col-xs-12"><h1>IMAGES</h1></div></div>
+            <ul>
+                <div class="row"></div>                                                                   
+            </ul>
+        </div>
+    </div>
+
+    <div id="videos-page" class="pages">
+        <div class="container">
+            <div class="row"><div class="header col-xs-12"><h1>VIDEOS</h1></div></div>
+            <ul>
+                <div class="row"></div>                                                                  
+            </ul>
+        </div>
+    </div>    
+
+    <footer>
+    	<ul class="row">
+    		<li class="col-xs-3"><a href="#"><i class="fa fa-behance fa-2x" aria-hidden="true"></i></a></li>
+    		<li class="col-xs-3"><a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
+    		<li class="col-xs-3"><a href="#"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a></li>
+    		<li class="col-xs-3"><a href="#"><i class="fa fa-vimeo fa-2x" aria-hidden="true"></i></a></li>
+    	</ul>
+    </footer>
+
+</body>
+
+<script type="text/javascript" src="modal.js"></script>
+<script type="text/javascript">
+
+
+
+var behanceUserAPI = "https://www.behance.net/v2/users/LTjr/projects?api_key=Vw3U3zTXhfDdnRFQkG8r0OWwoTO4LXLz";
+
+$.ajax({
+    url: behanceUserAPI,
+ 
+    // The name of the callback parameter, as specified by the YQL service
+    jsonp: "callback",
+ 
+    // Tell jQuery we're expecting JSONP
+    dataType: "jsonp",
+ 
+    // Work with the response
+    success: function( response ) {
+        console.log( response ); // server response
+        loadPage(response);
+    }
+});
+
+function getPage(list) {
+    // console.log(list);
+        
+    var content ='';
+    var currPage = null;
+    var pageContentID =  "#"+list.name+"-page ul div"; 
+
+    list.data.forEach(function(artwork) {
+        var url = artwork.covers.original;
+        var desc = artwork.name;
+        // console.log(artwork);
+        if(list.name === "images"){
+            if(currPage !== "images"){
+                content = '';
+                currPage = "images";
+            }
+
+        content+= '<li class="col-xs-12 col-sm-6 col-md-3 col-lg-3"><div class="tile img-tile"><div class="tile-img"><img class="img-responsive" src="'+url+'"></div><div class="tile-desc"><p>'+desc+'</p></div></div></li>';
+        } 
+        else if (list.name === "videos"){
+            if(currPage !== "videos"){
+                content = '';
+                currPage = "videos";                
+            }    
+        content += '<li class="col-xs-12 col-sm-12 col-md-12 col-lg-6"><div class="tile vid-tile"><div class="tile-vid"><img src="'+url+'"></div><div class="tile-desc"><p>'+desc+'</p></div></div></li>';
+        }
+
+        
+    });
+    console.log(pageContentID)
+        $(pageContentID).html("").append(content);
+ }   
+
+// <li class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+//                         <div class="tile">
+//                             <div class="tile-vid">
+//                                 <img class="img-responsive" src="https://mir-cdn.behance.net/v1/rendition/project_modules/fs/595ef143295887.57ea5979428ec.jpg">
+//                             </div>
+//                             <div class="tile-desc">
+//                                 <p>Awesome art!</p>
+//                             </div>
+//                         </div>    
+//                     </li>
+
+function loadPage(data){
+    // cache page info ??
+    // var imageList = [];
+    var imageCat = ["Graphic Design","Illustration","Digital Art","Print Design","Photography","Character Design"];
+    // var videoList = [];
+
+    var pageLists = {
+        imageList: {
+            name: "images",
+            data:[]
+        },
+        videoList: {
+            name: "videos",
+            data:[]
+        }
+    }
+  
+    var currPage = "home-page";
+    // loop thru projects to sort out 2 lists 
+    for(var project in data.projects){
+        var fields = data.projects[project].fields;
+
+        fields.some(function(field) {
+            if(field === "Cinematography"){
+                return pageLists.videoList.data.push(data.projects[project]);
+            } else if (imageCat.indexOf(field) > -1){
+                return pageLists.imageList.data.push(data.projects[project]);
+            }
+        });  
+    }  
+    
+    $(".nav-btn").on('click',function() {
+
+        var currPageID = "#"+currPage;
+        var toPage = $(this).attr("id");
+        var toPageID = "#"+toPage+"-page";
+        var toPageIDP = "#"+toPage+"-page p";
+        var toCurrIDP = currPageID+" p";
+        var navMenu = "";
+        var tl = new TimelineMax();
+
+        tl
+            .to($(currPageID),.8,{autoAlpha:0,display:"none"})
+            .to($(toPageID),0,{display:"block"})
+            .to($(toPageID),.8,{autoAlpha:1},.2)
+            .to($(toPageIDP),.5,{autoAlpha:1,top:"30px"},'-=.5')
+        ;   
+
+    // ISSUE - nav disappear content moved up then autoAlpha to 0??
+
+
+    if(toPage === "home"){
+         $("#logo").css({"color":"#fff"});
+         $("#content").css("color","#fff");
+         $("#pages-nav").css("display","none");
+         $(toCurrIDP).css({"top":"0px","opacity":"0"});
+
+    }else{  
+         $("#content").css("color","#000");
+         $("#logo").css({"color":"#333"});
+         $("#pages-nav").css("display","block");
+         if(toPage === "images"){
+            getPage(pageLists.imageList);         
+         }else if(toPage === "videos"){
+            getPage(pageLists.videoList);
+         }            
+    }
+
+        currPage = toPage+"-page";
+
+        var imgModal = new Modal(currPageID);
+        imgModal.init();
+    });
+
+
+}
+
+
+	function verticalCenter() {
+		var contentWidth = $("#content").height();
+		var fullWidth = $(window).height();
+		var marginDiff = (fullWidth - contentWidth) / 2;
+		$("#content").css("margin-top",marginDiff);
+	}
+
+	document.addEventListener("DOMContentLoaded", function(event) {	
+
+        verticalCenter();
+
+		window.onresize = function(event){
+			verticalCenter();
+		}
+
+	});
+
+</script>
+</html>
